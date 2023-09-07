@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://br2u5ipbsnh6x"]
+
+[ext_resource type="Texture2D" uid="uid://t571hnl6asie" path="res://Sprites/frame.png" id="1_4buxv"]
+[ext_resource type="Script" path="res://Scripts/TimerTransition.gd" id="2_cu0e6"]
+
+[node name="TransitionScene" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(366, 640)
+scale = Vector2(11.4375, 20)
+texture = ExtResource("1_4buxv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+script = ExtResource("2_cu0e6")
+
+[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]

@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://4e1h376mopia"]
+
+[ext_resource type="Texture2D" uid="uid://dub8ohgpdg2kr" path="res://Sprites/enemyWalking_1.png" id="1_nr3jx"]
+[ext_resource type="Script" path="res://Scripts/Inimigo.gd" id="1_x4l1u"]
+[ext_resource type="Texture2D" uid="uid://c1lnhboncujir" path="res://Sprites/enemyWalking_2.png" id="2_fm12i"]
+[ext_resource type="Texture2D" uid="uid://bj4scmym8inxp" path="res://Sprites/enemySwimming_1.png" id="3_bgrov"]
+[ext_resource type="Texture2D" uid="uid://dtcjfk27s58wv" path="res://Sprites/enemySwimming_2.png" id="4_e274m"]
+[ext_resource type="Texture2D" uid="uid://b3h7p56tf3gtw" path="res://Sprites/enemyFlyingAlt_1.png" id="5_cs61m"]
+[ext_resource type="Texture2D" uid="uid://ett1qkavsvmw" path="res://Sprites/enemyFlyingAlt_2.png" id="6_ek0po"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6jvc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nr3jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fm12i")
+}],
+"loop": true,
+"name": &"andar",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bgrov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_e274m")
+}],
+"loop": true,
+"name": &"nadar",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_cs61m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ek0po")
+}],
+"loop": true,
+"name": &"voar",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c4bhk"]
+radius = 36.0
+height = 100.0
+
+[node name="Turba" type="RigidBody2D" groups=["mobs"]]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_x4l1u")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_a6jvc")
+animation = &"andar"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_c4bhk")
+
+[node name="Visibilidade" type="VisibleOnScreenNotifier2D" parent="."]
+metadata/_edit_group_ = true
+
+[connection signal="screen_exited" from="Visibilidade" to="." method="_on_visibilidade_screen_exited"]
